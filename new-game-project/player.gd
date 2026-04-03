@@ -7,10 +7,9 @@ var screen_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	position = Vector2(100, 100)
-	$AnimatedSprite2D.play("walk")
+	position = Vector2(1020, 585)
 	screen_size = get_viewport_rect().size
-	#hide()
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -25,23 +24,26 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
 
-	# Normalize to prevent faster diagonal movement
 	if direction != Vector2.ZERO:
-		direction = direction.normalized()
-		velocity = direction * speed
-		$AnimatedSprite2D.play()
+		velocity = direction.normalized() * speed
+		$AnimatedSprite2D.play("walk_left")
+		$AnimatedSprite2D.flip_h = velocity.x > 0
+		#$CollisionShape2D.flip_h = velocity.x > 0
 	else:
 		velocity = Vector2.ZERO
 		$AnimatedSprite2D.stop()
+		
+	#print(direction)
 
-	# Apply movement + collisions
 	move_and_slide()
 
-	# Animation control
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
+	position = position.clamp(Vector2.ZERO, screen_size)
+
+# Layers
+# 0 = blue roof tiles
+# 1 = big tree
+# 2 = rock border tiles
+# 3 = top water grass border
+# 4 = grass left water right border
+# 5 = grass right water left border
+# 6 = grass top water bottom border

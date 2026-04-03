@@ -2,32 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c7iyn45oksqsh" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cj40awtwunjlw" path="res://player.tscn" id="2_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://d2oh3rk00dptb" path="res://art/Nunk_Forward.png" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://xdr1cwfwos0y" path="res://tile_map_layer.tscn" id="3_lquwl"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lquwl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_1bvp3")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [node name="Main" type="Node" unique_id=1086952520]
 script = ExtResource("1_h2yge")
 
-[node name="Player" parent="." unique_id=1169544854 instance=ExtResource("2_1bvp3")]
-top_level = true
-visibility_layer = 2
-z_index = 1
-position = Vector2(0, 1)
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player" unique_id=233586237]
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_lquwl")
-animation = &"walk"
+[node name="Player" parent="." unique_id=1347446814 instance=ExtResource("2_1bvp3")]
 
 [node name="TileMapLayer" parent="." unique_id=884275231 instance=ExtResource("3_lquwl")]
+z_index = -1
